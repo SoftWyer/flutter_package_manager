@@ -13,9 +13,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  Image appImage;
-  List installedApps;
-  List userInstalledApps;
+  Image? appImage;
+  List? installedApps;
+  List? userInstalledApps;
 
   @override
   void initState() {
@@ -30,14 +30,14 @@ class _MyAppState extends State<MyApp> {
     try {
       platformVersion = await FlutterPackageManager.platformVersion;
       final value = await FlutterPackageManager.getPackageInfo(
-          "dev.wurikiji.flutter_hook_test");
-      appImage = value?.getAppIcon(
+          'dev.wurikiji.flutter_hook_test');
+      appImage = value.getAppIcon(
         fit: BoxFit.contain,
       );
       installedApps = await FlutterPackageManager.getInstalledPackages();
       userInstalledApps =
           await FlutterPackageManager.getUserInstalledPackages();
-      debugPrint("I got $value");
+      debugPrint('I got $value');
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -63,10 +63,10 @@ class _MyAppState extends State<MyApp> {
           child: ListView(
             children: <Widget>[
               Text(
-                  "Platform: $_platformVersion with\n${installedApps?.length}"),
+                  'Platform: $_platformVersion with\n${installedApps?.length}'),
               Text(
-                  "Platform: $_platformVersion with\n${userInstalledApps?.length}"),
-              if (appImage != null) appImage,
+                  'Platform: $_platformVersion with\n${userInstalledApps?.length}'),
+              if (appImage != null) appImage!,
             ],
           ),
         ),
